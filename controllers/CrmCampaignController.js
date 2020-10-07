@@ -15,7 +15,6 @@ class CrmCampaignControllers {
         })
     }
     static store(req,res){
-    console.log(req.body)
     const columns = Object.keys(req.body);
     const values = Object.values(req.body);
 
@@ -28,13 +27,9 @@ class CrmCampaignControllers {
         }
     }
     sql+= ")";
-    console.log(sql)
-    console.log(values)
     mysqlConnection.query(sql, values, (error, result, fields) => {
-    console.log(result)
     if (error){
         res.status(500).json({'error': error.message})
-        console.log(error.message)
         return;
     }else{    res.json({
         'exercise': req.body
@@ -42,7 +37,17 @@ class CrmCampaignControllers {
 
     }); 
         }
-    
+    static search(req,res){
+            var id = req.params['campaing_id']
+            var sql = `select * from CrmCampaign where internalId = ${id} `
+            mysqlConnection.query(sql,(err,rows,fields)=>{
+                if(!err){
+                    res.status(200).json(rows);
+                }else{
+                    console.log(err)
+                }
+            })
+        }
     
 }
 
