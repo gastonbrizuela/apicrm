@@ -38,7 +38,7 @@ class CrmCampaignControllers {
     }); 
         }
     static search(req,res){
-            var id = req.params['campaing_id']
+            var id = req.params['id']
             var sql = `select * from CrmCampaign where internalId = ${id} `
             mysqlConnection.query(sql,(err,rows,fields)=>{
                 if(!err){
