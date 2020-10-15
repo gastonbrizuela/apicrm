@@ -4,6 +4,6 @@ const crmcampaignController = require('../controllers/CrmCampaignController')
 
 router.get('/api',crmcampaignController.index)
 router.post('/api',crmcampaignController.store)
-router.get('/main/campaign/:id',crmcampaignController.search)
+router.get('/campaign/:id',crmcampaignController.search)
 
 module.exports = router;
