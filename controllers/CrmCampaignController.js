@@ -15,6 +15,8 @@ class CrmCampaignControllers {
         })
     }
     static store(req,res){
+    console.log('llega donde guarda los datos')
+    console.log('llega donde guarda los datos dos')
     const columns = Object.keys(req.body);
     const values = Object.values(req.body);
 
@@ -29,9 +31,10 @@ class CrmCampaignControllers {
     sql+= ")";
     mysqlConnection.query(sql, values, (error, result, fields) => {
     if (error){
+        console.log(error.message)
         res.status(500).json({'error': error.message})
         return;
-    }else{    res.json({
+    }else{res.json({
         'exercise': req.body
     })}
 
@@ -48,6 +51,17 @@ class CrmCampaignControllers {
                 }
             })
         }
+    static delete(req,res){
+        var id = req.params['id']
+        var sql = `delete from CrmCampaign where internalId = ${id}`
+        mysqlConnection.query(sql,(err,rows,fields)=>{
+            if(!err){
+                res.status(200)
+            }else{
+                console.log()
+            }
+        })
+    }
     
 }
 
